@@ -14,8 +14,9 @@ public class Player {
     private String city;
     private int rank;
     private List<String> contacts;
+    private int salary;
 
-    public Player(int id, String firstName, int age, String gender, String dept, String city, int rank, List<String> contacts) {
+    public Player(int id, String firstName, int age, String gender, String dept, String city, int rank, List<String> contacts, int salary) {
         this.id = id;
         this.firstName = firstName;
         this.age = age;
@@ -24,6 +25,15 @@ public class Player {
         this.city = city;
         this.rank = rank;
         this.contacts = contacts;
+        this.salary = salary;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public int getId() {
@@ -95,12 +105,12 @@ public class Player {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return id == player.id && age == player.age && rank == player.rank && Objects.equals(firstName, player.firstName) && Objects.equals(gender, player.gender) && Objects.equals(dept, player.dept) && Objects.equals(city, player.city) && Objects.equals(contacts, player.contacts);
+        return salary == player.salary && id == player.id && age == player.age && rank == player.rank && Objects.equals(firstName, player.firstName) && Objects.equals(gender, player.gender) && Objects.equals(dept, player.dept) && Objects.equals(city, player.city) && Objects.equals(contacts, player.contacts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, age, gender, dept, city, rank, contacts);
+        return Objects.hash(id, firstName, age, gender, dept, city, rank, contacts, salary);
     }
 
     @Override
@@ -114,6 +124,7 @@ public class Player {
                 ", city='" + city + '\'' +
                 ", rank=" + rank +
                 ", contacts=" + contacts +
+                ", salary=" + salary +
                 '}';
     }
 }
