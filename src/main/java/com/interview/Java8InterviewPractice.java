@@ -1,9 +1,6 @@
 package main.java.com.interview;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Java8InterviewPractice {
@@ -53,6 +50,71 @@ public class Java8InterviewPractice {
                 collect(Collectors.groupingBy(t -> t, Collectors.counting()));
         System.out.println(occurrenceCount);
 
+        // 7. Given a list of integers, find out all the even numbers from the list
+        List<Integer> integerList = Arrays.asList(10,15,8,49,25,98,32);
+        List<Integer> evenList = integerList.stream().filter(t -> t % 2 == 0).toList();
+        System.out.println("Even numbers from the list " +evenList);
+
+        // 8. Given a list of integers, find out all the numbers starting with 1
+        List<Integer> listOfInteger = Arrays.asList(10,15,8,49,25,98,32);
+        List<String> listOfIntegerInString = listOfInteger.stream().map(t -> t.toString()).toList();
+        List<String> listOfIntegerStartingWith1 = listOfIntegerInString.stream().filter(t -> t.startsWith("1")).toList();
+        System.out.println("List of integers starting with 1 "+listOfIntegerStartingWith1);
+
+        // 9a. Find duplicates from a given list of integers - Method 1
+        List<Integer> integersList = Arrays.asList(10,15,8,49,25,98,98,32,15);
+        Map<Integer, Long> integersDuplicateCount = integersList.stream().filter(t -> Collections.frequency(integersList, t) > 1)
+                .collect(Collectors.groupingBy(t -> t, Collectors.counting()));
+        System.out.println("Duplicates from the given list "+integersDuplicateCount);
+
+        // 9b. Find duplicates from a given list of integers - Method 2
+        List<Integer> integersList2 = Arrays.asList(10,15,8,49,25,98,98,32,15);
+        Set<Integer> set = new HashSet<>();
+        List<Integer> duplicateIntList = integersList2.stream().filter(t -> !set.add(t)).collect(Collectors.toList()); // !set.add(t) - Breakdown explained in comment below
+        System.out.println("Duplicates from the given list using set "+duplicateIntList);
+
+        // 10. Remove whitespaces from String
+        String str = "  This    is a sample String which   has    white spaces  ";
+        String stringWithoutSpaces = str.chars().filter(c -> c != ' ') // .chars() returns an IntStream of Unicode code points.
+                .mapToObj(c -> (char) c) // converts the IntStream to a Stream<Character>.
+                .map(c -> c.toString()) // converts each Character to its string representation.
+                .collect(Collectors.joining()); // join the characters into a single string.
+        System.out.println("String after removing whitespaces "+stringWithoutSpaces);
+
+        // 11. Find the maximum value present in the list
+        List<Integer> findMaxList = Arrays.asList(10,15,8,49,25,98,98,32,15);
+        Integer maxValue = findMaxList.stream().max(Comparator.comparing(t -> t)).get();
+        System.out.println("MaxValue from the given list "+maxValue);
+
+        // 12a. Sort the list of integers in ascending order
+        List<Integer> unsortedList = Arrays.asList(10,15,8,49,25,98,98,32,15);
+        List<Integer> sortedListAscOrder = unsortedList.stream().sorted().collect(Collectors.toList());
+        System.out.println("List of sorted elements in ascending order "+sortedListAscOrder);
+
+        // 12b. Sort the list of integers in descending order
+        List<Integer> sortedListDescOrder = unsortedList.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
+        System.out.println("List of sorted elements in descending order "+sortedListDescOrder);
+
+        // 13. Given an integer array, return true if any value appears at least twice in the array, and return false if every element is distinct.
+        int[] duplicateNums = {1,3,2,3,4,5};
+        List<Integer> duplicateNumsList = Arrays.stream(duplicateNums).boxed().collect(Collectors.toList());
+        Set<Integer> setList = new HashSet<>(duplicateNumsList);
+        System.out.println("Does the list has any duplicates ");
+        System.out.println(setList.size() == duplicateNumsList.size());
+
     }
 }
+
+/*
+        How !set.add(t) is working ?
+
+        Set<Integer> set1 = new HashSet<>();
+          List<Integer> list1 = new ArrayList<>();
+          for (Integer i : integersList2) {
+              boolean isDuplicateFound = !set1.add(i);
+              if (isDuplicateFound)
+                  list1.add(i);
+          }
+        System.out.println(list1);
+ */
 
