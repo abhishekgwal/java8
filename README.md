@@ -1,4 +1,5 @@
 **Java 8 Features**
+![StringImmutable.png](src%2Fmain%2Fjava%2Fcom%2Fresources%2Fimages%2FStringImmutable.png)
 ![HashMapInternal.png](src%2Fmain%2Fjava%2Fcom%2Fresources%2Fimages%2FHashMapInternal.png)
 ![HashMapInternalWorking.png](src%2Fmain%2Fjava%2Fcom%2Fresources%2Fimages%2FHashMapInternalWorking.png)
 ![HashTableVsConcurrentHashMap.png](src%2Fmain%2Fjava%2Fcom%2Fresources%2Fimages%2FHashTableVsConcurrentHashMap.png)
