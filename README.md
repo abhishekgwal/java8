@@ -9,6 +9,6 @@
 
 <h1 style="font-size: 24px;">Completeable Future</h1>
 
-![WhatIsCompleteableFuture.png](..%2F..%2FDesktop%2FWhatIsCompleteableFuture.png)
-![WhyCompleteableFuture.png](..%2F..%2FDesktop%2FWhyCompleteableFuture.png)
-![runAsyncVsSupplyAsync.png](..%2F..%2FDesktop%2FrunAsyncVsSupplyAsync.png)
+![WhatIsCompleteableFuture.png](src%2Fmain%2Fjava%2Fcom%2Fresources%2Fimages%2FWhatIsCompleteableFuture.png)
+![WhyCompleteableFuture.png](src%2Fmain%2Fjava%2Fcom%2Fresources%2Fimages%2FWhyCompleteableFuture.png)
+![runAsyncVsSupplyAsync.png](src%2Fmain%2Fjava%2Fcom%2Fresources%2Fimages%2FrunAsyncVsSupplyAsync.png)
