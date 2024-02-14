@@ -1,4 +1,4 @@
-package main.java.com.interview;
+package com.interview;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -42,6 +42,7 @@ public class Java8InterviewPractice {
         // 5. Concatenate List of String and separate with a delimiter
         List<String> stringList = Arrays.asList("Welcome", "to", "Java");
         String concateListOfString = stringList.stream().collect(Collectors.joining("-"));
+        //String concateListOfString = String.join("-", stringList);
         System.out.println(concateListOfString);
 
         // 6. Find only duplicates with its count from the String ArrayList
@@ -52,13 +53,12 @@ public class Java8InterviewPractice {
 
         // 7. Given a list of integers, find out all the even numbers from the list
         List<Integer> integerList = Arrays.asList(10,15,8,49,25,98,32);
-        List<Integer> evenList = integerList.stream().filter(t -> t % 2 == 0).toList();
+        List<Integer> evenList = integerList.stream().filter(t -> t % 2 == 0).collect(Collectors.toList());
         System.out.println("Even numbers from the list " +evenList);
 
         // 8. Given a list of integers, find out all the numbers starting with 1
         List<Integer> listOfInteger = Arrays.asList(10,15,8,49,25,98,32);
-        List<String> listOfIntegerInString = listOfInteger.stream().map(t -> t.toString()).toList();
-        List<String> listOfIntegerStartingWith1 = listOfIntegerInString.stream().filter(t -> t.startsWith("1")).toList();
+        List<Integer> listOfIntegerStartingWith1 = listOfInteger.stream().filter(t -> Integer.toString(t).startsWith("1")).collect(Collectors.toList());
         System.out.println("List of integers starting with 1 "+listOfIntegerStartingWith1);
 
         // 9a. Find duplicates from a given list of integers - Method 1
@@ -101,6 +101,30 @@ public class Java8InterviewPractice {
         Set<Integer> setList = new HashSet<>(duplicateNumsList);
         System.out.println("Does the list has any duplicates ");
         System.out.println(setList.size() == duplicateNumsList.size());
+
+        // 14. Count the occurrence of each character in a string
+        String s = "ilovejavacoding";
+        Map<String, Long> occurrenceCountForGivenString = Arrays.stream(s.split("")).collect(Collectors.groupingBy(t -> t, Collectors.counting()));
+        System.out.println("Occurrence of each character in a string "+occurrenceCountForGivenString);
+
+        // 15. Find all duplicate element from a given string
+        String s2 = "ilovetocodeinstyle";
+        Map<String, List<String>> stringListMap = Arrays.stream(s2.split(""))
+                .collect(Collectors.groupingBy(t -> t));
+        List<String> duplicateElements = stringListMap.entrySet().stream().filter(t -> t.getValue().size() >= 2).map(t -> t.getKey()).collect(Collectors.toList());
+        System.out.println("Duplicate elements from the given string "+duplicateElements);
+
+        // 16. Find first non-repeating element from a String
+        String s3 = "ilovetocodeinstyle";
+        Map<String, Long> stringMap = Arrays.stream(s3.split("")).collect(Collectors.groupingBy(t -> t, LinkedHashMap::new, Collectors.counting()));
+        String firstNonRepeatingElement = stringMap.entrySet().stream().filter(t -> t.getValue() == 1).findFirst().get().getKey();
+        System.out.println("First non-repeating element " +firstNonRepeatingElement);
+
+        // 17. Find the longest string from a given array
+        String[] strArray = {"java", "python", "microservices", "springboot"};
+        List<String> strList = Arrays.stream(strArray).collect(Collectors.toList());
+        String longestString = strList.stream().reduce((word1, word2) -> word1.length() > word2.length() ? word1 : word2).get();
+        System.out.println("Longest string from a given array "+longestString);
 
     }
 }
